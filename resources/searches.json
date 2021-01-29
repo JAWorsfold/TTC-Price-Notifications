@@ -1,0 +1,12 @@
+{
+  "searches": [
+    { "name": "Dreugh Wax", "min_sale_price" : 11000 },
+    { "name": "Tempering Alloy", "min_sale_price" : 10000},
+    { "name": "Rosin", "min_sale_price" : 4000},
+    { "name": "Kuta", "min_sale_price" : 3000},
+    { "name": "Perfect Roe", "min_sale_price" : 22000},
+    { "name": "Ring of a Mother's Sorrow", "min_sale_price" : 34000, "champion": true, "level": 160, "qualityID": 3, "quality": "Purple", "traitID": 17, "trait": "Arcane"}
+    { "name": "Ring of a Mother's Sorrow", "min_sale_price" : 800000, "champion": true, "level": 160, "qualityID": 4, "quality": "Gold", "traitID": 17, "trait": "Arcane"}
+  ],
+  "min_profit_margin" : 0.20
+}
