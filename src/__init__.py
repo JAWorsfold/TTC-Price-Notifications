@@ -1,3 +1,3 @@
-# from .filename import Class
+from .parsehtml import TTCPriceCheckParser
 
-# __all__ = ['ClassName']
+__all__ = ['TTCPriceCheckParser']
