@@ -4,17 +4,31 @@
 
 import json
 
-traders_file = open("..\\resources\\traders.json")
+class Resources():
 
-traders = json.load(traders_file)
+  _traders_fp = ".\\resources\\traders.json"
+  _searches_fp = ".\\resources\\searches.json"
+  traders = {}
+  searches = {}
+  min_profit_margin = 0.1
 
-inaccessible = traders["inaccessible"]
+  def __init__(self):
+    # load traders from filepath
+    traders = self._load_file_as_json(self._traders_fp)
 
-traders = {key: value for (key, value) in traders["traders"].items()
-           if value["region"] not in inaccessible}
+    # remove any inaccessible traders
+    inaccessible = traders["inaccessible"]
+    self.traders = {
+        key: value for (key, value) in traders["traders"].items()
+        if value["region"] not in inaccessible
+    }
 
-traderId = 56
-if str(traderId) in traders:
-  print(traders[str(traderId)])
-else:
-  print('undefined')
+    # load searches
+    searches = self._load_file_as_json(self._searches_fp)
+    self.searches = searches["searches"]
+    if searches["min_profit_margin"]:
+      self.min_profit_margin = searches["min_profit_margin"]
+
+  def _load_file_as_json(self, fp):
+    with open(fp) as f:
+      return json.load(f)

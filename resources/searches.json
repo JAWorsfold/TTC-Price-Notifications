@@ -1,12 +1,27 @@
 {
   "searches": [
-    { "ItemNamePattern": "Dreugh+Wax", "min_sale_price" : 11000 },
-    { "ItemNamePattern": "Tempering+Alloy", "min_sale_price" : 10000},
-    { "ItemNamePattern": "Rosin", "min_sale_price" : 4000},
-    { "ItemNamePattern": "Kuta", "min_sale_price" : 3000},
-    { "ItemNamePattern": "Perfect+Roe", "min_sale_price" : 22000},
-    { "ItemNamePattern": "Ring+of+a+Mother%27s+Sorrow", "min_sale_price" : 34000, "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "quality": "Purple", "ItemTraitID": 17, "trait": "Arcane"},
-    { "ItemNamePattern": "Ring+of+a+Mother%27s+Sorrow", "min_sale_price" : 800000, "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "quality": "Gold", "ItemTraitID": 17, "trait": "Arcane"}
+    { "ItemNamePattern": "Dreugh+Wax" },
+    { "ItemNamePattern": "Tempering+Alloy"},
+    { "ItemNamePattern": "Rosin"},
+    { "ItemNamePattern": "Kuta"},
+    { "ItemNamePattern": "Perfect+Roe"},
+    { "ItemNamePattern": "Hakeijo"},
+    { "ItemNamePattern": "Zircon+Plating"},
+    { "ItemNamePattern": "Aetherial+Dust"},
+    { "ItemNamePattern": "Chromium+Plating"},
+    { "ItemNamePattern": "Ring+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "ItemTraitID": 17},
+    { "ItemNamePattern": "Ring+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "ItemTraitID": 17},
+    { "ItemNamePattern": "Necklace+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "ItemTraitID": 17},
+    { "ItemNamePattern": "Necklace+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "ItemTraitID": 17},
+    { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "ItemTraitID": 3},
+    { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "ItemTraitID": 3},
+    { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "ItemTraitID": 2},
+    { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "ItemTraitID": 2}
   ],
-  "min_profit_margin" : 0.20
+  "min_profit_margin" : 0.33,
+  "traitIDs" : {
+    "3" : "Infused",
+    "2" : "Precise",
+    "17" : "Arcane"
+  }
 }
