@@ -35,6 +35,7 @@ class TTCRequests():
       parser.feed(str(req["resp"].content))
       req["search"].update(parser.get_prices())
     self._update_search_urls()
+    print(self.prck_requests)
 
   def search_requests(self):
     self.make_all_requests(self.srch_requests)
