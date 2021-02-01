@@ -10,6 +10,7 @@ class Resources():
   _searches_fp = ".\\resources\\searches.json"
   traders = {}
   searches = {}
+  traits = {}
   min_profit_margin = 0.1
 
   def __init__(self):
@@ -28,6 +29,7 @@ class Resources():
     self.searches = searches["searches"]
     if searches["min_profit_margin"]:
       self.min_profit_margin = searches["min_profit_margin"]
+    self.traits = searches["traits"]
 
   def _load_file_as_json(self, fp):
     with open(fp) as f:

@@ -2,7 +2,7 @@ import concurrent.futures
 import requests
 import threading
 
-from src import TTCPriceCheckParser, TTCTradeParser
+from src import TTCPriceCheckParser
 
 thread_local = threading.local()
 
@@ -23,9 +23,9 @@ class TTCRequests():
     self._build_urls(self.prck_requests, self._prck_suffix)
     self._build_urls(self.srch_requests, self._srch_suffix)
 
-  def reset(self):
-    self.prck_requests = []
-    self.srch_requests = []
+  def reset_searches(self):
+    for search in self.srch_requests:
+      search["resp"] = None
 
   def price_checks(self):
     self.make_all_requests(self.prck_requests)
@@ -34,18 +34,17 @@ class TTCRequests():
       parser.reset_check()
       parser.feed(str(req["resp"].content))
       req["search"].update(parser.get_prices())
-    print(self.prck_requests)
+    self._update_search_urls()
 
   def search_requests(self):
-    self._update_search_urls()
     self.make_all_requests(self.srch_requests)
     print(self.srch_requests)
-    trade_parser = TTCTradeParser()
 
   def _calc_buy_price(self, sell_price):
     fees = sell_price * self._guild_fees
     prof_marg_amt = sell_price * self.prof_marg
-    return round(sell_price - fees - prof_marg_amt, 2)
+    return (round(sell_price - fees - prof_marg_amt, 2),
+            round(sell_price - fees, 2))
 
   def _build_urls(self, urls, suffix):
     for i in self.searches:
@@ -57,8 +56,9 @@ class TTCRequests():
   def _update_search_urls(self):
     for req in self.srch_requests:
       param_name = "PriceMax"
-      price_max = self._calc_buy_price(req["search"]["avg"])
-      max_price_param = {param_name: price_max}
+      price_max, price_aft_fees = self._calc_buy_price(req["search"]["avg"])
+      max_price_param = {param_name: price_max,
+                         "price_after_fees": price_aft_fees}
       req['search'].update(max_price_param)
       req['url'] += f"&{param_name}={str(price_max)}&SortBy=LastSeen&Order=desc"
 
