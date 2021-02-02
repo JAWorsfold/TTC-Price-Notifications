@@ -57,10 +57,8 @@ if __name__ == "__main__":
     req.price_checks()
 
     # write price check data to csv
-    CSVHelper.dict_to_csv("./data/price_check_data.csv", req.prck_requests,
-                          'search', add_date=True, date=dt)
-    # TODO - write to csv - date+time + search data
-    # TODO - write to csv helper class
+    # CSVHelper.dict_to_csv("./data/price_check_data.csv", req.prck_requests,
+    #                       'search', add_date=True, date=dt)
 
     # start schedule job to search periodically for deals
     # message = "First"
