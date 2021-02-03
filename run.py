@@ -5,15 +5,12 @@ import time
 
 from src import TTCRequests, Resources, TTCTradeParser, CSVHelper
 
-global wait_time
-wait_time = 60
-
 
 def get_unix_timestamp(dt):
     return
 
 
-def handle_search_requests(sc, unix_time=False):
+def handle_search_requests(sc, wait=60, unix_time=False):
     print("Starting search")
     print(unix_time)
     # my code
@@ -24,14 +21,14 @@ def handle_search_requests(sc, unix_time=False):
     # - send in unix timestamp and ignore those after the last timestamp (after the last search)
     # - filter our deals from traders not accessible
     # - write to csv the item name (quality, trait), expected profit (unit and total), where the deal is
-
+    # - must keep a set of all tradeIDs already seen and don't add these to csv
     # store the unix timestamp from the last trade for each item
 
     # req.reset_searches()
     unix_time = int(time.time())
     print(unix_time)
     print("Starting wait")
-    s.enter(1, 1, handle_search_requests, (sc, unix_time))
+    s.enter(1, 1, handle_search_requests, (sc, wait,  unix_time))
 
 
 if __name__ == "__main__":
@@ -57,8 +54,9 @@ if __name__ == "__main__":
     req.price_checks()
 
     # write price check data to csv
-    # CSVHelper.dict_to_csv("./data/price_check_data.csv", req.prck_requests,
-    #                       'search', add_date=True, date=dt)
+    CSVHelper.dict_to_csv(
+      "./data/price_check_data.csv",
+      CSVHelper.add_date_column(dt, resources.searches))
 
     # start schedule job to search periodically for deals
     # message = "First"

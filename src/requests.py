@@ -35,11 +35,9 @@ class TTCRequests():
       parser.feed(str(req["resp"].content))
       req["search"].update(parser.get_prices())
     self._update_search_urls()
-    print(self.prck_requests)
 
   def search_requests(self):
     self.make_all_requests(self.srch_requests)
-    print(self.srch_requests)
 
   def _calc_buy_price(self, sell_price):
     fees = sell_price * self._guild_fees
@@ -57,7 +55,7 @@ class TTCRequests():
   def _update_search_urls(self):
     for req in self.srch_requests:
       param_name = "PriceMax"
-      price_max, price_aft_fees = self._calc_buy_price(req["search"]["avg"])
+      price_max, price_aft_fees = self._calc_buy_price(req["search"]["low-sug"])
       max_price_param = {param_name: price_max,
                          "price_after_fees": price_aft_fees}
       req['search'].update(max_price_param)
