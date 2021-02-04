@@ -18,11 +18,8 @@ class CSVHelper():
     else:
       df = CSVHelper.remove_duplicates(file, df, date_columns=date_columns)
       if df is None: return
-    print('pre-sort\n', df)
     if sort_order:
-      # sort order as list of column names
       df.sort_values(by=sort_order, ascending=sort_direction, inplace=True)
-      print('post-sort\n', df)
     df.to_csv(file, index=False, mode='w', header=True)
 
   @staticmethod
