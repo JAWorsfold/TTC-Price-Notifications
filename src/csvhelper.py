@@ -8,7 +8,7 @@ from pathlib import Path
 class CSVHelper():
 
   @staticmethod
-  def dict_to_csv(file, lst_dict):
+  def dict_to_csv(file, lst_dict, sort_order=None):
     df = pd.DataFrame.from_dict(lst_dict)
     df = df.replace(r'^\s*$', 0, regex=True)
     if not os.path.exists(file):
@@ -17,6 +17,8 @@ class CSVHelper():
     else:
       df = CSVHelper.remove_duplicates(file, df)
       if df is None: return
+    if sort_order:
+      df.sort_values(by=sort_order)
     df.to_csv(file, index=False, mode='w', header=True)
 
   @staticmethod
@@ -32,3 +34,8 @@ class CSVHelper():
   def remove_duplicates(file, df):
     df_read = pd.read_csv(file)
     return pd.concat([df_read, df]).drop_duplicates(keep=False, ignore_index=True, inplace=True)
+
+  @staticmethod
+  def order_by_time_desc():
+    # TODO always write fresh with newest at the top
+    pass

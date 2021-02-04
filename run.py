@@ -11,10 +11,11 @@ def get_unix_timestamp(dt):
 
 
 def handle_search_requests(sc, wait=60, unix_time=False):
-    print("Starting search")
+    print("######### INITIATING SEARCHES #########" )
     print(unix_time)
     # my code
     req.search_requests()
+    print(req.srch_requests)
 
     # trades parser must
     # - parse response content
@@ -24,16 +25,17 @@ def handle_search_requests(sc, wait=60, unix_time=False):
     # - must keep a set of all tradeIDs already seen and don't add these to csv
     # store the unix timestamp from the last trade for each item
 
-    # req.reset_searches()
+    # req.srch_requests () = new list of searches from parser
+    # req.reset_searches() -> DO NOT NEED HOPEFULLY
     unix_time = int(time.time())
     print(unix_time)
-    print("Starting wait")
-    s.enter(1, 1, handle_search_requests, (sc, wait,  unix_time))
+    print(f"######### WAITING {wait} SECONDS #########" )
+    s.enter(wait, 1, handle_search_requests, (sc, wait,  unix_time))
 
 
 if __name__ == "__main__":
 
-    print("Program starting")
+    print("########## PROGRAM STARTED ############" )
 
     # get todays date
     dt = date.today()
@@ -51,15 +53,16 @@ if __name__ == "__main__":
 
     # build and send price check get requests
     req = TTCRequests(resources.searches, resources.min_profit_margin)
+    print("######### RUNNING PRICE CHECK #########" )
     req.price_checks()
 
     # write price check data to csv
+    print("######### WRITING PRICE DATA ##########" )
     CSVHelper.dict_to_csv(
       "./data/price_check_data.csv",
       CSVHelper.add_date_column(dt, resources.searches))
 
     # start schedule job to search periodically for deals
-    # message = "First"
-    # s = sched.scheduler(time.time, time.sleep)
-    # s.enter(0, 1, handle_search_requests, (s,))
-    # s.run()
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(0, 1, handle_search_requests, (s,))
+    s.run()
