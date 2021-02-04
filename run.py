@@ -60,9 +60,12 @@ if __name__ == "__main__":
     print("######### WRITING PRICE DATA ##########" )
     CSVHelper.dict_to_csv(
       "./data/price_check_data.csv",
-      CSVHelper.add_date_column(dt, resources.searches))
+      CSVHelper.add_date_column(dt_start, resources.searches),
+      sort_order=['date', 'ItemNamePattern'],
+      sort_direction=[False, True],
+      date_columns=['date'])
 
     # start schedule job to search periodically for deals
-    s = sched.scheduler(time.time, time.sleep)
-    s.enter(0, 1, handle_search_requests, (s,))
-    s.run()
+    # s = sched.scheduler(time.time, time.sleep)
+    # s.enter(0, 1, handle_search_requests, (s,))
+    # s.run()

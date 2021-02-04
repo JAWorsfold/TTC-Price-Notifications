@@ -8,17 +8,21 @@ from pathlib import Path
 class CSVHelper():
 
   @staticmethod
-  def dict_to_csv(file, lst_dict, sort_order=None):
+  def dict_to_csv(file, lst_dict, sort_order=None, 
+                  sort_direction=None, date_columns=False):
     df = pd.DataFrame.from_dict(lst_dict)
     df = df.replace(r'^\s*$', 0, regex=True)
     if not os.path.exists(file):
       dr = '/'.join(file.split('/')[:-1])
       Path(dr).mkdir(parents=True, exist_ok=True)
     else:
-      df = CSVHelper.remove_duplicates(file, df)
+      df = CSVHelper.remove_duplicates(file, df, date_columns=date_columns)
       if df is None: return
+    print('pre-sort\n', df)
     if sort_order:
-      df.sort_values(by=sort_order)
+      # sort order as list of column names
+      df.sort_values(by=sort_order, ascending=sort_direction, inplace=True)
+      print('post-sort\n', df)
     df.to_csv(file, index=False, mode='w', header=True)
 
   @staticmethod
@@ -31,11 +35,6 @@ class CSVHelper():
     return new_list
 
   @staticmethod
-  def remove_duplicates(file, df):
-    df_read = pd.read_csv(file)
-    return pd.concat([df_read, df]).drop_duplicates(keep=False, ignore_index=True, inplace=True)
-
-  @staticmethod
-  def order_by_time_desc():
-    # TODO always write fresh with newest at the top
-    pass
+  def remove_duplicates(file, df, date_columns=False):
+    df_read = pd.read_csv(file, parse_dates=date_columns)
+    return pd.concat([df_read, df]).drop_duplicates(ignore_index=True)
