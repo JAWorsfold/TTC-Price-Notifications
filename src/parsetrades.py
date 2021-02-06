@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class TTCTradeParser:
   # trades parser must
   # - parse response content
@@ -31,18 +33,21 @@ class TTCTradeParser:
       response = search['resp'].json()
       current_page = response['TradeListPageModel']['TotalPageCount']
       if current_page > 0:
-        self.trades.append(
-          {
-            
-          }
-        )
+        trade_details = response['TradeListPageModel']['TradeDetails']
+        # posted, item info, amount, total profit, buy_unit, buy_total, sell_unit, sell_total, sell_after_fees
+        for trade_item in trade_details:
+          self.trades.append(
+            {
+              print(datetime.utcfromtimestamp(trade_item['DiscoverUnixTime']))
+            }
+          )
 
 
-      if search['page'] == 1:
-        # first search
-        page_count = response['TradeListPageModel']['TotalPageCount']
-        if page_count > 1:
-          new_searches = self._get_page_searches(page_count)
+      # if search['page'] == 1:
+      #   # first search
+      #   page_count = response['TradeListPageModel']['TotalPageCount']
+      #   if page_count > 1:
+      #     new_searches = self._get_page_searches(page_count)
     #     # create new requests
     #   if search['page']
     #   if page_count == 1:

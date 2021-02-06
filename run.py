@@ -56,12 +56,17 @@ if __name__ == "__main__":
 
   # load resources
   resources = Resources()
+  print(resources.recaptcha)
 
   # build and send price check get requests
-  req = TTCRequests(resources.searches, resources.min_profit_margin)
+  req = TTCRequests(resources.searches, 
+                    resources.min_profit_margin, 
+                    resources.recaptcha)
+
   print("######### RUNNING PRICE CHECK #########" )
   req.price_checks()
 
+  print(req.srch_requests)
   # write price check data to csv
   print("######### WRITING PRICE DATA ##########" )
   CSVHelper.dict_to_csv(

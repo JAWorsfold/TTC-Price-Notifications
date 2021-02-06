@@ -17,8 +17,9 @@ class TTCRequests():
   prck_requests = []
   srch_requests = []
 
-  def __init__(self, searches, prof_marg):
+  def __init__(self, searches, prof_marg, recaptcha):
     self.searches = searches
+    self._srch_suffix = self._srch_suffix + f"&V3ReCaptchaToken={recaptcha}"
     self.prof_marg = prof_marg
     self._build_urls(self.prck_requests, self._prck_suffix)
     self._build_urls(self.srch_requests, self._srch_suffix)

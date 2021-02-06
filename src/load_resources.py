@@ -11,6 +11,7 @@ class Resources():
   traders = {}
   searches = {}
   traits = {}
+  recaptcha = ""
   min_profit_margin = 0.1
 
   def __init__(self):
@@ -30,6 +31,7 @@ class Resources():
     if searches["min_profit_margin"]:
       self.min_profit_margin = searches["min_profit_margin"]
     self.traits = searches["traits"]
+    self.recaptcha = searches["recaptcha"]
 
   def _load_file_as_json(self, fp):
     with open(fp) as f:
