@@ -18,7 +18,7 @@
     { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 3, "ItemTraitID": 2},
     { "ItemNamePattern": "Inferno+Staff+of+a+Mother%27s+Sorrow", "IsChampionPoint": true, "LevelMin": 160, "ItemQualityID": 4, "ItemTraitID": 2}
   ],
-  "min_profit_margin" : 0.15,
+  "min_profit_margin" : 0.10,
   "traits" : {
     "3" : "Infused",
     "2" : "Precise",

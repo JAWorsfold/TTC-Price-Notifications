@@ -50,7 +50,7 @@ class TTCRequests():
       url = f"{self._url}{suffix}"
       for k, v in i.items():
         url += f"&{k}={v}"
-      urls.append({"search": i, "url": url, "resp": None})
+      urls.append({"search": i, "url": url, "resp": None, "page": 1})
 
   def _update_search_urls(self):
     for req in self.srch_requests:
